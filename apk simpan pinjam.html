@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artha Jasa - Beranda & Login</title>
+    <style>
+        /* --- CSS DASAR --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f0f2f5; color: #333; }
+
+        /* --- HEADER & NAV --- */
+        header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
+        header h1 { color: #1abc9c; margin-top: 10px; }
+        header img { width: 70px; border-radius: 50%; border: 2px solid #1abc9c; }
+
+        nav { background: #34495e; stroke-width: top; z-index: 100; }
+        nav ul { list-style: none; display: flex; justify-content: center; }
+        nav ul li a { color: white; text-decoration: none; padding: 15px 20px; display: block; }
+        nav ul li a:hover { background: #1abc9c; }
+
+        /* --- LAYOUT BERANDA (TWO COLUMNS) --- */
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px 5%;
+            justify-content: center;
+        }
+
+        /* Bagian Informasi */
+        .info-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Bagian Form Login di Beranda */
+        .login-card {
+            width: 380px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #1abc9c;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
+        
+        .btn-primary { 
+            width: 100%; background: #27ae60; color: white; border: none; 
+            padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; 
+        }
+
+        .error-text { color: #e74c3c; font-size: 0.8rem; display: none; margin-top: 5px; }
+
+        /* --- HALAMAN LAIN (Hidden by default) --- */
+        .page-content { display: none; padding: 40px 5%; }
+        .active { display: block; }
+
+        /* --- TABEL --- */
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #34495e; color: white; }
+
+        footer { background: #2c3e50; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .hero-container { flex-direction: column; }
+            .login-card { width: 100%; }
+            nav ul { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.jpg" alt="Logo">
+    <h1>Rama Jasa Koperasi</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#" onclick="showPage('page-beranda')">Beranda</a></li>
+        <li><a href="#" onclick="showPage('page-transaksi')">Transaksi</a></li>
+        <li><a href="#" onclick="showPage('page-profil')">Profil</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div id="page-beranda" class="page-content active">
+        <div class="hero-container">
+            <div class="info-card">
+                <h2>Selamat Datang!</h2>
+                <p style="margin: 15px 0;">Kelola simpanan dan pinjaman Anda dengan mudah dan transparan bersama Artha Jasa.</p>
+                <hr>
+                <h4 style="margin-top: 15px;">Cara Menggunakan Aplikasi:</h4>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>Gunakan formulir di samping untuk masuk ke akun Anda.</li>
+                    <li>Setelah login, Anda bisa mengakses menu <strong>Transaksi</strong>.</li>
+                    <li>Cek perkembangan saldo Anda secara real-time.</li>
+                </ul>
+            </div>
+
+            <div class="login-card">
+                <h3 style="text-align: center; margin-bottom: 20px;">Login Anggota</h3>
+                <form id="homeLoginForm">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="logEmail" placeholder="email@anda.com">
+                        <div id="errEmail" class="error-text">Email tidak valid</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="logPass" placeholder="Minimal 6 karakter">
+                        <div id="errPass" class="error-text">Password minimal 6 karakter</div>
+                    </div>
+                    <button type="button" class="btn-primary" onclick="handleLogin()">MASUK SEKARANG</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-transaksi" class="page-content">
+        <div class="info-card">
+            <h2>Input Transaksi</h2>
+            <form id="trxForm" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Nama Transaksi</label>
+                    <input type="text" id="trxNama" placeholder="Contoh: Simpanan Wajib">
+                </div>
+                <div class="form-group">
+                    <label>Jumlah (Rp)</label>
+                    <input type="number" id="trxJumlah" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="trxKategori">
+                        <option value="">-- Pilih --</option>
+                        <option value="Simpanan">Simpanan</option>
+                        <option value="Pinjaman">Pinjaman</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-primary" onclick="saveTransaction()">SIMPAN TRANSAKSI</button>
+            </form>
+
+            <h3 style="margin-top: 40px;">Daftar Transaksi Terakhir</h3>
+            <table>
+                <thead>
+                    <tr><th>Nama</th><th>Jumlah</th><th>Kategori</th></tr>
+                </thead>
+                <tbody id="trxTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="page-profil" class="page-content">
+        <div class="info-card">
+            <h2>Profil Rama Jasa simpan pinjam</h2>
+            <p style="margin-top: 15px;">Rama Jasa simpan pinjam adalah sistem informasi simpan pinjam berbasis web yang mengedepankan keamanan dan kenyamanan anggota dalam mengelola dana koperasi.</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 Rama Jasa Koperasi Digital</p>
+</footer>
+
+<script>
+    // Navigasi Halaman
+    function showPage(id) {
+        document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Fungsi Login
+    function handleLogin() {
+        const email = document.getElementById('logEmail').value;
+        const pass = document.getElementById('logPass').value;
+        let valid = true;
+
+        if(!email.includes('@')) {
+            document.getElementById('errEmail').style.display = 'block';
+            valid = false;
+        } else {
+            document.getElementById('errEmail').style.display = 'none';
+        }
+
+        if(pass.length < 6) {
+            document.getElementById('errPass').style.display = 'block';
+            valid = false;
+        } else {
+            document.getElementById('errPass').style.display = 'none';
+        }
+
+        if(valid) {
+            alert("Login Berhasil! Selamat Datang.");
+            showPage('page-transaksi'); // Pindah ke transaksi setelah login
+        }
+    }
+
+    // Simpan Transaksi
+    function saveTransaction() {
+        const nama = document.getElementById('trxNama').value;
+        const jml = document.getElementById('trxJumlah').value;
+        const kat = document.getElementById('trxKategori').value;
+
+        if(!nama || !jml || !kat) {
+            alert("Harap lengkapi semua field transaksi!");
+            return;
+        }
+
+        const table = document.getElementById('trxTableBody');
+        const row = table.insertRow();
+        row.innerHTML = `<td>${nama}</td><td>Rp ${parseInt(jml).toLocaleString()}</td><td>${kat}</td>`;
+        
+        alert("Transaksi disimpan!");
+        document.getElementById('trxForm').reset();
+    }
+</script>
+
+</body>
+</html>
