@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artha Jasa - Beranda & Login</title>
     <style>
-        /* --- CSS DASAR --- */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f0f2f5; color: #333; }
 
-        /* --- HEADER & NAV --- */
         header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
         header h1 { color: #1abc9c; margin-top: 10px; }
         header img { width: 70px; border-radius: 50%; border: 2px solid #1abc9c; }
@@ -19,7 +18,6 @@
         nav ul li a { color: white; text-decoration: none; padding: 15px 20px; display: block; }
         nav ul li a:hover { background: #1abc9c; }
 
-        /* --- LAYOUT BERANDA (TWO COLUMNS) --- */
         .hero-container {
             display: flex;
             flex-wrap: wrap;
@@ -28,7 +26,6 @@
             justify-content: center;
         }
 
-        /* Bagian Informasi */
         .info-card {
             flex: 1;
             min-width: 300px;
@@ -38,7 +35,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Bagian Form Login di Beranda */
+
         .login-card {
             width: 380px;
             background: white;
@@ -48,7 +45,6 @@
             border-top: 5px solid #1abc9c;
         }
 
-        /* --- FORM STYLING --- */
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
@@ -60,18 +56,15 @@
 
         .error-text { color: #e74c3c; font-size: 0.8rem; display: none; margin-top: 5px; }
 
-        /* --- HALAMAN LAIN (Hidden by default) --- */
         .page-content { display: none; padding: 40px 5%; }
         .active { display: block; }
 
-        /* --- TABEL --- */
         table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
         th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
         th { background: #34495e; color: white; }
 
         footer { background: #2c3e50; color: white; text-align: center; padding: 20px; margin-top: 40px; }
 
-        /* Responsif */
         @media (max-width: 768px) {
             .hero-container { flex-direction: column; }
             .login-card { width: 100%; }
@@ -175,13 +168,13 @@
 </footer>
 
 <script>
-    // Navigasi Halaman
+   
     function showPage(id) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
     }
 
-    // Fungsi Login
+
     function handleLogin() {
         const email = document.getElementById('logEmail').value;
         const pass = document.getElementById('logPass').value;
@@ -207,7 +200,7 @@
         }
     }
 
-    // Simpan Transaksi
+    
     function saveTransaction() {
         const nama = document.getElementById('trxNama').value;
         const jml = document.getElementById('trxJumlah').value;
@@ -228,4 +221,5 @@
 </script>
 
 </body>
+
 </html>
